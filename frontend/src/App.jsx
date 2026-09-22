@@ -69,7 +69,6 @@ export default function App() {
     {error && <div className="message error" role="alert">{error} <button className="secondary small" disabled={loading} onClick={refreshPlatforms}>Retry</button></div>}
     <PlatformForm onCreate={createPlatform} busy={savingPlatform} />
     <PlatformTable platforms={platforms} selectedPlatform={selectedPlatform} onSelect={selectPlatform} loading={loading} busy={detailLoading || sendingTelemetry} />
-    {selectedPlatform ? <TelemetryPanel key={selectedPlatform.id} platform={selectedPlatform} readiness={readiness} history={telemetryHistory} loading={detailLoading} busy={sendingTelemetry} error={detailError} onSend={sendTelemetry} /> : <section className="selection-hint">Select a platform to view readiness and send telemetry.</section>}
-    <footer>Demo data only. Records are cleared when the backend stops.</footer>
+    {selectedPlatform ? <TelemetryPanel key={selectedPlatform.id} platform={selectedPlatform} readiness={readiness} history={telemetryHistory} loading={detailLoading} busy={sendingTelemetry} error={detailError} onSend={sendTelemetry} /> : null}
   </main>;
 }
