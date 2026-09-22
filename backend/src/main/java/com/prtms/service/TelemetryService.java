@@ -17,8 +17,11 @@ public class TelemetryService {
     private final PlatformRepository platforms;
     private final TelemetryRepository telemetryRepository;
 
+    private final HealthAssessmentService healthAssessment;
 
-    public TelemetryService(PlatformRepository platforms, TelemetryRepository telemetryRepository) {
+    public TelemetryService(PlatformRepository platforms, TelemetryRepository telemetryRepository,
+                            HealthAssessmentService healthAssessment) {
+        this.healthAssessment = healthAssessment;
         this.platforms = platforms;
         this.telemetryRepository = telemetryRepository;
     }
@@ -30,6 +33,10 @@ public class TelemetryService {
                 request.linkQuality(), LocalDateTime.now());
         telemetryRepository.save(telemetry);
         log.info("Telemetry received for: {}", platform.getPlatformCode());
+        PlatformStatus previousStatus = platform.getStatus();
+        platform.setStatus(healthAssessment.assess(telemetry));
+        platforms.save(platform);
+        log.info("Platform status updated: {} -> {}", previousStatus, platform.getStatus());
         return toResponse(telemetry);
     }
 
@@ -56,6 +63,6 @@ public class TelemetryService {
     private TelemetryResponse toResponse(Telemetry telemetry) {
         return new TelemetryResponse(telemetry.getId(), telemetry.getPlatform().getPlatformCode(),
                 telemetry.getBatteryLevel(), telemetry.getTemperature(), telemetry.getLinkQuality(),
-                telemetry.getPlatform().getStatus(), telemetry.getTimestamp());
+                healthAssessment.assess(telemetry), telemetry.getTimestamp());
     }
 }
