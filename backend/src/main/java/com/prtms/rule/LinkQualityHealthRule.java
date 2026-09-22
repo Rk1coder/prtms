@@ -3,8 +3,6 @@ package com.prtms.rule;
 import com.prtms.entity.PlatformStatus;
 import com.prtms.entity.Telemetry;
 import org.springframework.stereotype.Component;
-
-// Synthetic thresholds for this learning demo only.
 @Component
 public class LinkQualityHealthRule implements HealthRule {
     @Override

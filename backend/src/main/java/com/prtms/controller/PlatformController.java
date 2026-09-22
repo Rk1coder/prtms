@@ -23,7 +23,6 @@ public class PlatformController {
     public PlatformResponse createPlatform(@Valid @RequestBody CreatePlatformRequest request) {
         return service.createPlatform(request);
     }
-
     @GetMapping
     public List<PlatformResponse> getAllPlatforms() {
         return service.getAllPlatforms();
