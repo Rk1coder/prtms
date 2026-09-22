@@ -23,7 +23,7 @@ export default function TelemetryPanel({ platform, readiness, history, loading, 
   }
 
   return <section className="panel selected-panel" aria-label="Selected Platform">
-    <div className="section-heading"><div><p className="eyebrow">SELECTED PLATFORM</p><h2 className="code">{platform.platformCode}</h2><p className="muted platform-meta">{platform.name} · {platform.type}</p></div><div><span className="field-caption">Current Status</span><StatusBadge status={platform.status} /></div></div>
+    <div className="section-heading"><div><h2>Selected Platform</h2><h2 className="code">{platform.platformCode}</h2><p className="muted platform-meta">{platform.name} · {platform.type}</p></div><div><span className="field-caption">Current Status</span><StatusBadge status={platform.status} /></div></div>
     <div className="telemetry-grid">
       <div><h3>Send Telemetry</h3><p className="muted">Enter a synthetic reading to assess platform health.</p>
         <form onSubmit={handleSubmit}><fieldset disabled={busy || loading} className="telemetry-form">
@@ -34,7 +34,7 @@ export default function TelemetryPanel({ platform, readiness, history, loading, 
         </fieldset></form>
         {message && <div className={`message ${message.kind}`} role={message.kind === 'error' ? 'alert' : 'status'}>{message.text}</div>}
       </div>
-      <aside className="readiness-card"><p className="eyebrow">CURRENT READINESS</p><h3 className="code">{platform.platformCode}</h3>
+      <aside className="readiness-card"><h3>Current Readiness</h3><h3 className="code">{platform.platformCode}</h3>
         {loading ? <p role="status">Loading...</p> : readiness ? <><StatusBadge status={readiness.status} /><span className="field-caption">Latest Telemetry</span><time>{formatTime(readiness.latestTelemetryTime)}</time></> : <p className="muted">Readiness unavailable.</p>}
       </aside>
     </div>

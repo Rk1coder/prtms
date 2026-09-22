@@ -60,12 +60,16 @@ export default function App() {
   }
 
   return <main>
-    <header className="page-header"><div className="brand-mark" aria-hidden="true">P</div><div><p className="eyebrow">PRTMS / PLATFORM MONITOR</p><h1>Platform Readiness &amp;<br className="desktop-break" /> Telemetry Monitoring System</h1><p className="subtitle">Synthetic Platform Health Monitoring POC</p></div><span className="demo-tag">SYNTHETIC DATA ONLY</span></header>
+    <header className="page-header">
+      <h1>PRTMS</h1>
+      <p>Platform Readiness &amp; Telemetry Monitoring System</p>
+      <p className="muted">Synthetic Platform Health Monitoring POC</p>
+    </header>
     <SummaryCards platforms={platforms} />
     {error && <div className="message error" role="alert">{error} <button className="secondary small" disabled={loading} onClick={refreshPlatforms}>Retry</button></div>}
     <PlatformForm onCreate={createPlatform} busy={savingPlatform} />
     <PlatformTable platforms={platforms} selectedPlatform={selectedPlatform} onSelect={selectPlatform} loading={loading} busy={detailLoading || sendingTelemetry} />
-    {selectedPlatform ? <TelemetryPanel key={selectedPlatform.id} platform={selectedPlatform} readiness={readiness} history={telemetryHistory} loading={detailLoading} busy={sendingTelemetry} error={detailError} onSend={sendTelemetry} /> : <section className="selection-hint"><span aria-hidden="true">↳</span> Select a platform to view readiness and send telemetry.</section>}
-    <footer><span>PRTMS · Learning POC</span><span>Synthetic metrics. Demo thresholds. In-memory storage.</span></footer>
+    {selectedPlatform ? <TelemetryPanel key={selectedPlatform.id} platform={selectedPlatform} readiness={readiness} history={telemetryHistory} loading={detailLoading} busy={sendingTelemetry} error={detailError} onSend={sendTelemetry} /> : <section className="selection-hint">Select a platform to view readiness and send telemetry.</section>}
+    <footer>Demo data only. Records are cleared when the backend stops.</footer>
   </main>;
 }

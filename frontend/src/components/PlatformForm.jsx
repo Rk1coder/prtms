@@ -19,7 +19,7 @@ export default function PlatformForm({ onCreate, busy }) {
   }
 
   return <section className="panel">
-    <div className="section-heading"><div><p className="eyebrow">REGISTER</p><h2>Add Platform</h2></div></div>
+    <div className="section-heading"><div><h2>Add Platform</h2></div></div>
     <p className="muted">Register a platform to start sending synthetic telemetry.</p>
     <form onSubmit={handleSubmit}>
       <fieldset disabled={busy} className="platform-form">
