@@ -23,7 +23,7 @@ export default function PlatformForm({ onCreate, busy }) {
     <p className="muted">Register a platform to start sending synthetic telemetry.</p>
     <form onSubmit={handleSubmit}>
       <fieldset disabled={busy} className="platform-form">
-        <label>Platform Code<input required maxLength={255} value={code} onChange={(e) => setCode(e.target.value)} placeholder="UAV-001" /></label>
+        <label>Platform Code<input required maxLength={255} pattern="[A-Za-z0-9_\-]+" title="Use letters, numbers, hyphens or underscores" value={code} onChange={(e) => setCode(e.target.value)} placeholder="UAV-001" /></label>
         <label>Platform Name<input required maxLength={255} value={name} onChange={(e) => setName(e.target.value)} placeholder="Demo UAV" /></label>
         <label>Platform Type<select value={type} onChange={(e) => setType(e.target.value)}>
           <option>UAV</option><option>UGV</option><option>SENSOR</option>
